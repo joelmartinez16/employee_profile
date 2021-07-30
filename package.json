@@ -1,0 +1,25 @@
+{
+  "name": "employee_profile",
+  "version": "1.0.0",
+  "description": "## Your Task",
+  "main": "index.js",
+  "dependencies": {
+    "inquirer": "^8.1.2",
+    "jest": "^27.0.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joelmartinez16/employee_profile.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joelmartinez16/employee_profile/issues"
+  },
+  "homepage": "https://github.com/joelmartinez16/employee_profile#readme"
+}
