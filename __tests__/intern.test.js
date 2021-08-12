@@ -1,40 +1,56 @@
-const intern = require('../lib/intern');
+const Intern = require('../lib/Intern');
 
-describe('school', () => {
-    const schoolName = "CSUMB";
-    const e = new intern("New intern", "id", "email@mail.com", schoolName);
-    expect(e.school).toBe(schoolName);
-});
+const employeeName = "Cheyenne";
+const id = "7";
+const email = "cheyenne@email.com";
+const school = "CSUSB"
+
+describe('Intern', () => {
+   it('Should create intern', () => {
+       const intern = new Intern(employeeName, id, email, school)
+       expect(intern.employeeName).toBe("Cheyenne");
+       expect(intern.id).toBe("7");
+       expect(intern.email).toBe("cheyenne@email.com");
+       expect(intern.school).toBe("CSUSB");
+    })
+
 
 describe('getRole()', () => {
-    const role = "intern";
-    const e = new intern("New intern", "id", "email@mail.com", "CSUMB");
-    expect(e.getRole()).toBe(role);
+   it('Should get the Inters role', () => {
+       const intern = new Intern(employeeName, id, email, school);
+       expect(intern.getRole()).toBe('Intern')
+   })
 })
 
 describe('getSchool()', () => {
-    const schoolName = "CSUMB";
-    const e = new intern("New intern", "id", "email@mail.com", schoolName);
-    expect(e.getSchool()).toBe(schoolName);
+    it('Should get the Interns school', ()=> {
+        const intern = new Intern(employeeName, id, email, school);
+        expect(intern.getSchool()).toBe("CSUSB");
+    })
 });
 
-describe("HTML", () => {
-    it("Should display HTML for engineer", () => {
-        const intern = new intern(employeeName, id, email, schoolName);
-        expect(intern.createHTML()).toContain(` <div class="row"> <!--Intern -->
-        <div class="col s12 m6 l4"> 
-            <div class="card center-align hoverable">
-                <p class="name">Cheyenne</p>
-                <i class="fas fa-graduation-cap fa-3x"></i>
-                <p>Intern</p>
-                <div class="card-content">
-                    <p>ID: 10</p>
-                    <p>School: UCLA</p>
-                <div class="card-action">
-                    <a href="mailto:cheyenne@email.com" class="waves-effect waves-light btn"><i class="material-icons right">Email</i></a>
-                </div>
+describe("createHTML", () => {
+    it("Should display HTML for the intern", () => {
+        const intern = new Intern(employeeName, id, email, school);
+        expect(intern.createHTML()).toContain(`  
+        <div class="col p-0">
+          <div class="card m-3">
+            <div class="card-header text-white text-center intern-bg name-font">
+                <h4>Cheyenne</h4>
+                <h4><i class="fas fa-graduation-cap"></i> Intern</h4>
             </div>
+            <div class="card-body body-bg">
+              <ul class="list-group list-group-flush text">
+                <li class="list-group-item"><b>ID:</b> 7</li>
+                <li class="list-group-item"><b>Email:</b> <a href="mailto:cheyenne@email.com">cheyenne@email.com</a></li>
+                <li class="list-group-item"><b>School:</b> CSUSB</li>
+              </ul>
+            </div>
+          </div>
         </div>
-    </div> `)
-    } )
+  
+      `
+    );
+   })
  })
+}); 

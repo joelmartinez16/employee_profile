@@ -1,45 +1,59 @@
-const { it } = require('@jest/globals');
-const { describe } = require('yargs');
-const engineer = require('../lib/engineer');
+const Engineer = require("../lib/Engineer");
 
+const employeeName = "Joel";
+const id = "8";
+const email = "joemartinez87@hotmail.com";
+const gitHub = "joelmartinez16"
 
-describe('gitHub', () => {
-    const gitHub = "Git Hub ";
-    const e = new intern("New intern", "id", "email@mail.com", gitHub);
-    expect(e.gitHub).toBe(gitHub);
-});
+describe('Engineer', () => {
+    it('Should create a new Engineer', ()=> {
+        const engineer = new Engineer(employeeName, id, email, gitHub);
+        expect(engineer.employeeName).toBe("Joel");
+        expect(engineer.id).toBe("8");
+        expect(engineer.email).toBe("joemartinez87@hotmail.com");
+        expect(engineer.gitHub).toBe("joelmartinez16");
+
+    });
+
 
 describe('getRole()', () => {
-    const role = "engineer";
-    const e = new engineer("New intern", "id", "email@mail.com", "Git Hub");
-    expect(e.getRole()).toBe(role);
-})
+    it('Should get the Engineers role', ()=> {
+        const engineer = new Engineer(employeeName, id, email, gitHub);  
+        expect(engineer.getRole()).toBe("Engineer");  
+    })
+});
 
 describe('getGithub()', () => {
-    const gitHub = "Git Hub ";
-    const e = new intern("New intern", "id", "email@mail.com", schoolName);
-    expect(e.getGithub()).toBe(gitHub);
+    it('Should get Engineers gitHub', ()=>{
+        const engineer = new Engineer(employeeName, id, email, gitHub);
+        expect(engineer.getGithub()).toBe("joelmartinez16");
+    })
 });
 
 
 
 describe("HTML", () => {
     it("Should display HTML for engineer", () => {
-        const engineer = new engineer(employeeName, id, email, gitHub);
-        expect(engineer.createHTML()).toContain(`<div class="row"> <!-- Engineer -->
-        <div class="col s12 m6 l4"> 
-            <div class="card center-align hoverable">
-                <p class="name">Joel</p>
-                <i class="fas fa-user-cog fa-3x"></i>
-                <p>Engineer</p>
-                <div class="card-content">
-                    <p>ID: 8</p>
-                    <p>Github:<a href="https://github.com/joelmartinez16">Joel Martinez</a></p>
-                <div class="card-action">
-                    <a href="mailto:joemartinez87@hotmail.com" class="waves-effect waves-light btn"><i class="material-icons right">Email</i></a>
-                </div>
-            </div>
+        const engineer = new Engineer(employeeName, id, email, gitHub);
+        expect(engineer.createHTML()).toContain(`
+        
+        <div class="col p-0">
+        <div class="card m-3">
+          <div class="card-header text-white text-center engineer-bg name-font">
+              <h4>Joel</h4>
+              <h4><i class="fas fa-laptop-code"></i> Engineer</h4>
+          </div>
+          <div class="card-body body-bg">
+            <ul class="list-group list-group-flush text">
+              <li class="list-group-item"><b>ID:</b> 8</li>
+              <li class="list-group-item"><b>Email:</b> <a href="mailto:joemartinez87@hotmail.com">joemartinez87@hotmail.com</a></li>
+              <li class="list-group-item"><b>GitHub:</b> <a href="https://github.com/joelmartinez16" target="_blank">joelmartinez16</a></li>
+            </ul>
+          </div>
         </div>
-    </div>`)
+      </div>
+      
+        `)
     } )
- })
+ });
+});
