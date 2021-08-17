@@ -6,7 +6,7 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 
-const template = fs.readFileSync('./dist/index.html', 'utf-8')
+const template = fs.readFileSync('./src/main.html', 'utf-8')
 const employees = [];
 
 const manager = () => {
@@ -37,7 +37,7 @@ const manager = () => {
         type: "list",
         name: "addEmployee",
         message: "Who would you like add?",
-        choices: ["Engineer", "Intern", "Manager"]
+        choices: ["Engineer", "Intern", "Quit"]
     }
 ])
     .then((res) => {
@@ -50,7 +50,7 @@ const manager = () => {
         } else if (res.addEmployee === "Intern") {
             intern();
         }else {
-            generateHTML();
+            renderHTML();
         }
     })
 }
@@ -84,7 +84,7 @@ const engineer = () => {
         type: "list",
         name: "addEmployee",
         message: "Who would you like add?",
-        choices: ["Engineer", "Intern", "Manager"]
+        choices: ["Engineer", "Intern", "Quit"]
     },
 ])
     .then((res) =>{
@@ -128,10 +128,10 @@ const engineer = () => {
             type: "list",
             name: "addEmployee",
             message: "Who would you like add?",
-            choices: ["Engineer", "Intern", "Manager"]
+            choices: ["Engineer", "Intern", "Quit", ]
         },])
         .then((res) =>{
-            const intern = new Intern(res.name, res.id, res.email, res.officeNumber);
+            const intern = new Intern(res.name, res.id, res.email, res.school);
             employees.push(intern);
             if(res.addEmployee === "Engineer") {
                 engineer();
@@ -148,7 +148,7 @@ const init = () => {
 };
 
 const renderHTML = (employees) => {
-    return employees.map(a => a.createHTML()).join("");
+    return employees.map(a => a.generateHTML()).join("");
 }
 const generateHTML = () => {
     fs.writeFile('./dist/index.html',  template.replace("{{body}}", renderHTML(employees)), (err) => {
